@@ -1,7 +1,7 @@
 """Command-line interface for GitAI."""
 
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Optional
 
 import typer
 from rich.console import Console
@@ -14,7 +14,7 @@ from .hook import install_commit_msg_hook, uninstall_commit_msg_hook
 from .util import exit_with_error, print_info, print_success
 
 app = typer.Typer(
-    name="gitai",
+    name="git-ai",
     help="Generate Conventional Commit messages and changelog sections using AI",
     add_completion=False,
 )
@@ -25,7 +25,7 @@ console = Console()
 @app.command()
 def commit(
     hook: Annotated[
-        str | None,
+        Optional[str],
         typer.Option(
             "--hook",
             help="Path to COMMIT_EDITMSG file (used by Git hook)",
@@ -40,7 +40,7 @@ def commit(
         typer.Option("--no-body", help="Generate subject line only"),
     ] = False,
     style: Annotated[
-        str | None,
+        Optional[str],
         typer.Option(
             "--style",
             help="Commit style: conventional or plain",
@@ -119,14 +119,14 @@ def changelog(
         ),
     ] = "HEAD",
     version: Annotated[
-        str | None,
+        Optional[str],
         typer.Option(
             "--version",
             help="Version for changelog section header",
         ),
     ] = None,
     output: Annotated[
-        str | None,
+        Optional[str],
         typer.Option(
             "--output",
             help="Output file path (defaults to CHANGELOG.md)",

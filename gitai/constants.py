@@ -130,5 +130,5 @@ DEFAULT_TIMEOUT: Final[int] = 45
 HOOK_CONTENT: Final[
     str
 ] = """#!/usr/bin/env sh
-gitai commit --hook "$1" || exit 0
+git-ai commit --hook "$1" || exit 0
 """

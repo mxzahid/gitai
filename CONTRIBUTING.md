@@ -1,6 +1,6 @@
-# Contributing to GitAI
+# Contributing to Git-AI
 
-Thank you for your interest in contributing to GitAI! We welcome contributions from the community.
+Thank you for your interest in contributing to Git-AI! We welcome contributions from the community.
 
 ## Development Setup
 
