@@ -66,20 +66,36 @@ class Config:
         config_data = load_toml_config(config_path)
 
         llm_data = config_data.get("llm", {})
+
+        # auto-detect provider based on available environment variables
+        configured_provider = llm_data.get("provider")
+        if configured_provider is None:
+            if os.getenv("OPENAI_API_KEY"):
+                configured_provider = "openai"
+            elif os.getenv("OLLAMA_BASE_URL") or os.getenv("OLLAMA_MODEL"):
+                configured_provider = "ollama"
+            else:
+                configured_provider = None  # fallback
+
         llm_config = LLMConfig(
-            provider=llm_data.get("provider", "openai"),
-            model=llm_data.get("model", "gpt-4o-mini"),
+            provider=configured_provider,
+            model=llm_data.get(
+                "model",
+                (
+                    "gpt-4o-mini"
+                    if configured_provider == "openai"
+                    else "qwen2.5-coder:3b"
+                ),
+            ),
             max_tokens=llm_data.get("max_tokens", 300),
             temperature=llm_data.get("temperature", 0.0),
             timeout_seconds=llm_data.get("timeout_seconds", 45),
             api_key=(
-                os.getenv("OPENAI_API_KEY")
-                if llm_data.get("provider") == "openai"
-                else None
+                os.getenv("OPENAI_API_KEY") if configured_provider == "openai" else None
             ),
             base_url=(
                 os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-                if llm_data.get("provider") == "ollama"
+                if configured_provider == "ollama"
                 else None
             ),
         )
@@ -115,6 +131,8 @@ class Config:
         if self.llm.provider == "openai":
             return self.llm.api_key is not None
         elif self.llm.provider == "ollama":
-            # for Ollama, we assume it's available if base_url is set
-            return self.llm.base_url is not None
+            # for ollama we assume it's available if base_url is set or model is configured
+            return (
+                self.llm.base_url is not None or os.getenv("OLLAMA_MODEL") is not None
+            )
         return False

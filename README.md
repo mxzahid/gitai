@@ -127,6 +127,40 @@ git-ai changelog --since v1.0.0 --to main
 - `OLLAMA_BASE_URL`: Ollama server URL (default: http://localhost:11434)
 - `OLLAMA_MODEL`: Ollama model name (default: qwen2.5-coder:3b)
 
+### Configuration File
+
+GitAI supports optional configuration via a `.gitai.toml` file in your git repository root. This allows you to customize behavior beyond environment variables.
+
+**Auto-detection**: GitAI automatically detects your LLM provider based on environment variables (no config file needed!):
+- If `OPENAI_API_KEY` is set → uses OpenAI
+- If `OLLAMA_BASE_URL` or `OLLAMA_MODEL` is set → uses Ollama
+- Otherwise → falls back to OpenAI
+
+**Custom configuration**: Create `.gitai.toml` in your project root for advanced settings:
+
+```toml
+[llm]
+provider = "ollama"          # "openai" | "ollama"
+model = "qwen2.5-coder:3b"        # I suggest using one of: qwen2.5-coder:3b, qwen2.5-coder:1.5b, codellama:7b, deepseek-coder:6.7b
+max_tokens = 300
+temperature = 0.1
+timeout_seconds = 45
+
+[commit]
+style = "conventional"       # "conventional" | "plain"
+scope_detection = true
+include_body = true
+include_footers = true
+wrap_width = 72
+
+[changelog]
+grouping = "type"            # group by Conventional Commit type
+heading_style = "keep-a-changelog"
+
+[debug]
+debug_mode = false
+```
+
 ## How It Works
 
 ### Commit Message Generation
