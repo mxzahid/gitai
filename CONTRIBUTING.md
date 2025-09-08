@@ -1,4 +1,4 @@
-# Contributing to GitAI
+# Contributing to Git-AI
 
 Thank you for your interest in contributing to GitAI! We welcome contributions from the community.
 
@@ -14,8 +14,8 @@ Thank you for your interest in contributing to GitAI! We welcome contributions f
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/gitai.git
-   cd gitai
+   git clone https://github.com/yourusername/git-ai.git
+   cd git-ai
    ```
 
 2. Install dependencies:

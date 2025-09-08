@@ -42,7 +42,7 @@ install-build: build ## Build and install the package
 	pip install dist/*.whl
 
 run: ## Run the CLI
-	python -m gitai.cli
+	git-ai
 
 help-dev: ## Show development help
 	@echo "Development Workflow:"

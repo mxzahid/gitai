@@ -14,7 +14,7 @@ from .hook import install_commit_msg_hook, uninstall_commit_msg_hook
 from .util import exit_with_error, print_info, print_success
 
 app = typer.Typer(
-    name="gitai",
+    name="git-ai",
     help="Generate Conventional Commit messages and changelog sections using AI",
     add_completion=False,
 )
