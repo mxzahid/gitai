@@ -22,10 +22,10 @@ Use Local models with Ollama or OpenAI, gracefully degrades when no AI is availa
 
 ```bash
 # using pipx (recommended)
-pipx install git-ai
+pipx install enhanced-git
 
 # or using pip
-pip install git-ai
+pip install enhanced-git
 ```
 
 ### Setup (Optional AI Integration)
