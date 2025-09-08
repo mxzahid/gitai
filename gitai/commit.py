@@ -111,7 +111,7 @@ class CommitGenerator:
 
                 chunk_prompt = COMMIT_USER_PROMPT_SINGLE.format(diff=chunk.content)
                 if self.config.debug_settings.debug_mode:
-                    print(f"Chunk {i+1} prompt: {chunk_prompt[:200]}...")
+                    print(f"Chunk {i + 1} prompt: {chunk_prompt[:200]}...")
                 summary = self.provider.generate(
                     system=COMMIT_SYSTEM_PROMPT,
                     user=chunk_prompt,
@@ -120,7 +120,7 @@ class CommitGenerator:
                     timeout=self.config.llm.timeout_seconds,
                 )
                 if self.config.debug_settings.debug_mode:
-                    print(f"Chunk {i+1} summary: {summary}")
+                    print(f"Chunk {i + 1} summary: {summary}")
                 chunk_summaries.append(f"- {summary}")
 
             merge_prompt = COMMIT_USER_PROMPT_MERGE.format(

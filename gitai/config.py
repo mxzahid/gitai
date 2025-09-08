@@ -72,12 +72,16 @@ class Config:
             max_tokens=llm_data.get("max_tokens", 300),
             temperature=llm_data.get("temperature", 0.0),
             timeout_seconds=llm_data.get("timeout_seconds", 45),
-            api_key=os.getenv("OPENAI_API_KEY")
-            if llm_data.get("provider") == "openai"
-            else None,
-            base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-            if llm_data.get("provider") == "ollama"
-            else None,
+            api_key=(
+                os.getenv("OPENAI_API_KEY")
+                if llm_data.get("provider") == "openai"
+                else None
+            ),
+            base_url=(
+                os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+                if llm_data.get("provider") == "ollama"
+                else None
+            ),
         )
 
         commit_data = config_data.get("commit", {})
