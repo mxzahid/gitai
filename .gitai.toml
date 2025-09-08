@@ -1,0 +1,20 @@
+[llm]
+provider = "ollama"          # "openai" | "ollama"
+model = "qwen2.5-coder:3b"        # I suggest using one of: qwen2.5-coder:3b, qwen2.5-coder:1.5b, codellama:7b, deepseek-coder:6.7b
+max_tokens = 300
+temperature = 0.1
+timeout_seconds = 45
+
+[commit]
+style = "conventional"       # "conventional" | "plain"
+scope_detection = true
+include_body = true
+include_footers = true
+wrap_width = 72
+
+[changelog]
+grouping = "type"            # group by Conventional Commit type
+heading_style = "keep-a-changelog"
+
+[debug]
+debug_mode = false
