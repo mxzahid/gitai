@@ -52,6 +52,7 @@ docs = [
 
 [project.scripts]
 enhanced-git = "gitai.cli:app"
+git-ai = "gitai.cli:app"
 
 [project.urls]
 Homepage = "https://github.com/mxzahid/git-ai"
