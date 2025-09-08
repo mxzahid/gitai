@@ -64,7 +64,7 @@ class TestHookIntegration:
         assert content == HOOK_CONTENT
 
     def test_install_hook_already_installed(self, git_repo):
-        """Test installing hook when GitAI hook is already installed."""
+        """Test installing hook when Git-AI hook is already installed."""
         hooks_dir = git_repo / ".git" / "hooks"
         hook_path = hooks_dir / "commit-msg"
 

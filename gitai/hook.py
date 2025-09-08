@@ -25,7 +25,7 @@ def install_commit_msg_hook(force: bool = False) -> None:
     if hook_path.exists() and not force:
         content = hook_path.read_text().strip()
         if content == HOOK_CONTENT.strip():
-            print_success("GitAI commit-msg hook is already installed")
+            print_success("Git-AI commit-msg hook is already installed")
             return
 
         print_warning("Existing commit-msg hook found:")
@@ -36,7 +36,7 @@ def install_commit_msg_hook(force: bool = False) -> None:
         print_warning("Current hook content:")
         print_warning(content)
         print_warning("---")
-        print_warning("GitAI hook content:")
+        print_warning("Git-AI hook content:")
         print_warning(HOOK_CONTENT.strip())
 
         # offer to create backup
@@ -50,7 +50,7 @@ def install_commit_msg_hook(force: bool = False) -> None:
     try:
         hook_path.write_text(HOOK_CONTENT)
         make_executable(hook_path)
-        print_success("Installed GitAI commit-msg hook")
+        print_success("Installed Git-AI commit-msg hook")
         print_success("The hook will generate commit messages for your commits.")
         print_success("To remove it, delete or modify .git/hooks/commit-msg")
 
@@ -59,23 +59,23 @@ def install_commit_msg_hook(force: bool = False) -> None:
 
 
 def uninstall_commit_msg_hook() -> None:
-    """Remove the GitAI commit-msg hook."""
+    """Remove the Git-AI commit-msg hook."""
     git_root = find_git_root()
     hook_path = git_root / ".git" / "hooks" / "commit-msg"
 
     if not hook_path.exists():
-        print_warning("GitAI commit-msg hook not found")
+        print_warning("Git-AI commit-msg hook not found")
         return
 
     # check if it's our hook
     content = hook_path.read_text().strip()
     if content != HOOK_CONTENT.strip():
-        print_warning("Existing hook doesn't match GitAI hook content")
+        print_warning("Existing hook doesn't match Git-AI hook content")
         print_warning("Refusing to remove potentially modified hook")
         return
 
     try:
         hook_path.unlink()
-        print_success("Removed GitAI commit-msg hook")
+        print_success("Removed Git-AI commit-msg hook")
     except Exception as e:
         print_warning(f"Failed to remove hook: {e}")
