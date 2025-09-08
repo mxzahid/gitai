@@ -1,9 +1,9 @@
-# GitAI Development Makefile
+# Git-AI Development Makefile
 
 .PHONY: help install test lint format clean build
 
 help: ## Show this help message
-	@echo "GitAI Development Commands:"
+	@echo "Git-AI Development Commands:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-15s %s\n", $$1, $$2}'
 
 install: ## Install the package in development mode

@@ -64,7 +64,7 @@ class TestHookIntegration:
         assert content == HOOK_CONTENT
 
     def test_install_hook_already_installed(self, git_repo):
-        """Test installing hook when GitAI hook is already installed."""
+        """Test installing hook when Git-AI hook is already installed."""
         hooks_dir = git_repo / ".git" / "hooks"
         hook_path = hooks_dir / "commit-msg"
 
@@ -73,10 +73,10 @@ class TestHookIntegration:
         with patch("gitai.hook.print_success") as mock_success:
             install_commit_msg_hook()
 
-        mock_success.assert_called_with("GitAI commit-msg hook is already installed")
+        mock_success.assert_called_with("Git-AI commit-msg hook is already installed")
 
     def test_uninstall_hook(self, git_repo):
-        """Test uninstalling GitAI hook."""
+        """Test uninstalling Git-AI hook."""
         hooks_dir = git_repo / ".git" / "hooks"
         hook_path = hooks_dir / "commit-msg"
 
@@ -92,7 +92,7 @@ class TestHookIntegration:
         with patch("gitai.hook.print_warning") as mock_warning:
             uninstall_commit_msg_hook()
 
-        mock_warning.assert_called_with("GitAI commit-msg hook not found")
+        mock_warning.assert_called_with("Git-AI commit-msg hook not found")
 
     def test_uninstall_modified_hook(self, git_repo):
         """Test uninstalling when hook exists but is modified."""
@@ -105,7 +105,7 @@ class TestHookIntegration:
         with patch("gitai.hook.print_warning") as mock_warning:
             uninstall_commit_msg_hook()
 
-        mock_warning.assert_any_call("Existing hook doesn't match GitAI hook content")
+        mock_warning.assert_any_call("Existing hook doesn't match Git-AI hook content")
         mock_warning.assert_any_call("Refusing to remove potentially modified hook")
 
         assert hook_path.exists()

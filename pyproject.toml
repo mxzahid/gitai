@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "gitai"
+name = "git-ai"
 version = "1.0.0"
 description = "Generate Conventional Commit messages and changelog sections using AI"
 readme = "README.md"
@@ -51,13 +51,16 @@ docs = [
 ]
 
 [project.scripts]
-gitai = "gitai.cli:app"
+git-ai = "gitai.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/mxzahid/gitai"
-Repository = "https://github.com/mxzahid/gitai"
-Issues = "https://github.com/mxzahid/gitai/issues"
-Documentation = "https://github.com/mxzahid/gitai#readme"
+Homepage = "https://github.com/mxzahid/git-ai"
+Repository = "https://github.com/mxzahid/git-ai"
+Issues = "https://github.com/mxzahid/git-ai/issues"
+Documentation = "https://github.com/mxzahid/git-ai#readme"
+
+[tool.hatch.build.targets.wheel]
+packages = ["gitai"]
 
 [tool.hatch.metadata]
 allow-direct-references = true

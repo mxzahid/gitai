@@ -1,4 +1,4 @@
-# GitAI
+# Git-AI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
@@ -22,10 +22,10 @@ Use Local models with Ollama or OpenAI, gracefully degrades when no AI is availa
 
 ```bash
 # using pipx (recommended)
-pipx install gitai
+pipx install git-ai
 
 # or using pip
-pip install gitai
+pip install git-ai
 ```
 
 ### Setup (Optional AI Integration)
@@ -52,73 +52,73 @@ export OLLAMA_MODEL="qwen2.5-coder:3b"
 git add .
 
 # Install Git hook for automatic generation
-gitai hook install
+git-ai hook install
 
-#if using gitai hook, then just do git commit -m "some sample message"
-#if not using gitai hook use this:
-git commit -m "$(gitai commit)"
+#if using git-ai hook, then just do git commit -m "some sample message"
+#if not using git-ai hook use this:
+git commit -m "$(git-ai commit)"
 
 
 # generate changelog
-gitai changelog --since v1.0.0 --version v1.1.0
+git-ai changelog --since v1.0.0 --version v1.1.0
 ```
 
 ## Usage
 
 ### Commands
 
-#### `gitai commit`
+#### `git-ai commit`
 
 Generate a commit message from staged changes.
 
 ```bash
 # Basic usage
-gitai commit
+git-ai commit
 
 # Preview without committing
-gitai commit --dry-run
+git-ai commit --dry-run
 
 # Subject line only
-gitai commit --no-body
+git-ai commit --no-body
 
 # Force plain style (no conventional format)
-gitai commit --style plain
+git-ai commit --style plain
 
 # Used by Git hook
-gitai commit --hook /path/to/.git/COMMIT_EDITMSG
+git-ai commit --hook /path/to/.git/COMMIT_EDITMSG
 ```
 
-#### `gitai hook install`
+#### `git-ai hook install`
 
 Install Git hook for automatic commit message generation.
 
 ```bash
 # Install hook
-gitai hook install
+git-ai hook install
 
 # Force overwrite existing hook
-gitai hook install --force
+git-ai hook install --force
 
 # Remove hook
-gitai hook uninstall
+git-ai hook uninstall
 ```
 
-#### `gitai changelog`
+#### `git-ai changelog`
 
 Generate changelog section from commit history.
 
 ```bash
 # generate changelog from commits since v1.0.0
-gitai changelog --since v1.0.0
+git-ai changelog --since v1.0.0
 
 # with version header
-gitai changelog --since v1.0.0 --version v1.1.0
+git-ai changelog --since v1.0.0 --version v1.1.0
 
 # custom output file
-gitai changelog --since v1.0.0 --output HISTORY.md
+git-ai changelog --since v1.0.0 --output HISTORY.md
 
 # different end reference
-gitai changelog --since v1.0.0 --to main
+git-ai changelog --since v1.0.0 --to main
 ```
 
 ### Environment Variables
@@ -165,7 +165,7 @@ When no AI is configured, GitAI uses intelligent heuristics:
 
 ```bash
 # clone repository
-git clone https://github.com/yourusername/gitai.git
+git clone https://github.com/yourusername/git-ai.git
 cd gitai
 
 # install with dev dependencies
@@ -244,7 +244,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ```
 Error: No staged changes found. Did you forget to run 'git add'?
 ```
-**Solution**: Stage your changes with `git add` before running `gitai commit`
+**Solution**: Stage your changes with `git add` before running `git-ai commit`
 
 ### Missing API key
 ```
@@ -256,7 +256,7 @@ Warning: OPENAI_API_KEY environment variable is required
 ```
 Warning: Existing commit-msg hook found
 ```
-**Solution**: Use `gitai hook install --force` to overwrite, or manually merge
+**Solution**: Use `git-ai hook install --force` to overwrite, or manually merge
 
 ### Network timeouts
 ```
