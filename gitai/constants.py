@@ -127,6 +127,8 @@ CHANGELOG_WRAP_WIDTH: Final[int] = 100
 DEFAULT_TIMEOUT: Final[int] = 45
 
 # Git hook content
-HOOK_CONTENT: Final[str] = """#!/usr/bin/env sh
+HOOK_CONTENT: Final[
+    str
+] = """#!/usr/bin/env sh
 gitai commit --hook "$1" || exit 0
 """
