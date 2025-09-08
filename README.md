@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
-Generate Conventional Commit messages and changelog sections using AI. Simple to install, works with 
+Generate Conventional Commit messages and changelog sections using AI. Simple to install, works with
 Use Local models with Ollama or OpenAI, gracefully degrades when no AI is available.
 
 ##Features

@@ -1,4 +1,5 @@
 """Tests for diff collection and chunking."""
+
 from gitai.diff import DiffChunk, StagedDiff
 
 

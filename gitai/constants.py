@@ -31,9 +31,9 @@ Chunk summaries:
 {chunk_summaries}"""
 
 # Changelog prompts
-CHANGELOG_SYSTEM_PROMPT: Final[
-    str
-] = """You are an expert technical writer. Output markdown bullets only. Do not invent facts."""
+CHANGELOG_SYSTEM_PROMPT: Final[str] = (
+    """You are an expert technical writer. Output markdown bullets only. Do not invent facts."""
+)
 
 CHANGELOG_USER_PROMPT: Final[
     str
