@@ -70,12 +70,19 @@ class Config:
         # auto-detect provider based on available environment variables
         configured_provider = llm_data.get("provider")
         if configured_provider is None:
-            if os.getenv("OPENAI_API_KEY"):
-                configured_provider = "openai"
-            elif os.getenv("OLLAMA_BASE_URL") or os.getenv("OLLAMA_MODEL"):
+            # Debug environment variables
+            openai_key = os.getenv("OPENAI_API_KEY")
+            ollama_url = os.getenv("OLLAMA_BASE_URL")
+            ollama_model = os.getenv("OLLAMA_MODEL")
+
+            if ollama_url or ollama_model:
                 configured_provider = "ollama"
+            elif openai_key:
+                configured_provider = "openai"
             else:
-                configured_provider = None  # fallback
+                configured_provider = (
+                    "openai"  # fallback to openai (will use non-AI mode if no key)
+                )
 
         llm_config = LLMConfig(
             provider=configured_provider,

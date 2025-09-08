@@ -156,6 +156,28 @@ def changelog(
         exit_with_error(f"Error generating changelog: {e}")
 
 
+@app.command()
+def debug() -> None:
+    """Debug configuration and environment."""
+    import os
+    from .config import Config
+
+    print("=== GitAI Debug Information ===")
+    print(f"OPENAI_API_KEY: {'SET' if os.getenv('OPENAI_API_KEY') else 'NOT SET'}")
+    print(f"OLLAMA_BASE_URL: {os.getenv('OLLAMA_BASE_URL', 'NOT SET')}")
+    print(f"OLLAMA_MODEL: {os.getenv('OLLAMA_MODEL', 'NOT SET')}")
+
+    try:
+        config = Config.load()
+        print(f"\nDetected provider: {config.llm.provider}")
+        print(f"Model: {config.llm.model}")
+        print(f"Base URL: {config.llm.base_url}")
+        print(f"API Key: {'SET' if config.llm.api_key else 'NOT SET'}")
+        print(f"LLM Available: {config.is_llm_available()}")
+    except Exception as e:
+        print(f"Error loading config: {e}")
+
+
 @app.callback()
 def main() -> None:
     """GitAI - Generate Conventional Commit messages and changelog sections using AI."""

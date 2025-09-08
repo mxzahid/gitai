@@ -46,7 +46,9 @@ class CommitGenerator:
                         model=config.llm.model,
                         timeout=config.llm.timeout_seconds,
                     )
-            except Exception:
+            except Exception as e:
+                # Debug: print the exception to see what's failing
+                print(f"DEBUG: Failed to create provider: {e}")
                 self.provider = None
 
     def generate_commit_message(
