@@ -6,7 +6,7 @@
 Generate Conventional Commit messages and changelog sections using AI. Simple to install, works with
 Use Local models with Ollama or OpenAI, gracefully degrades when no AI is available.
 
-##Features
+## Features
 
 - **AI-Powered**: Generate commit messages using OpenAI or local Ollama models
 - **Conventional Commits**: Follows strict Conventional Commit formatting rules
