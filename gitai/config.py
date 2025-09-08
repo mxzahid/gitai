@@ -69,12 +69,14 @@ class Config:
 
         # auto-detect provider based on available environment variables
         configured_provider = llm_data.get("provider")
+        print(llm_data)
+
         if configured_provider is None:
             # Debug environment variables
             openai_key = os.getenv("OPENAI_API_KEY")
             ollama_url = os.getenv("OLLAMA_BASE_URL")
             ollama_model = os.getenv("OLLAMA_MODEL")
-
+            print(openai_key, ollama_url, ollama_model)
             if ollama_url or ollama_model:
                 configured_provider = "ollama"
             elif openai_key:
