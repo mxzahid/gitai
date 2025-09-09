@@ -178,6 +178,50 @@ def debug() -> None:
         print(f"Error loading config: {e}")
 
 
+@app.command()
+def setup(
+    provider: Annotated[
+        str,
+        typer.Option("--provider", help="LLM provider: openai or ollama"),
+    ] = "ollama",
+    model: Annotated[
+        str,
+        typer.Option("--model", help="Model name"),
+    ] = "qwen2.5-coder:3b",
+) -> None:
+    """Set up user-level GitAI configuration."""
+    from pathlib import Path
+
+    config_dir = Path.home() / ".config" / "gitai"
+    config_file = config_dir / "config.toml"
+
+    # Create config directory if it doesn't exist
+    config_dir.mkdir(parents=True, exist_ok=True)
+
+    # Create config content
+    config_content = f"""# GitAI User Configuration
+# This file is automatically created by 'git-ai setup'
+
+[llm]
+provider = "{provider}"
+model = "{model}"
+use_ollama = true
+
+[commit]
+style = "conventional"
+include_body = true
+"""
+
+    # Write config file
+    config_file.write_text(config_content)
+
+    print_success(f"Created user configuration at {config_file}")
+    print_info("GitAI will now automatically use Ollama for all repositories")
+    print_info(
+        "You can override this by creating a .gitai.toml file in specific projects"
+    )
+
+
 @app.callback()
 def main() -> None:
     """GitAI - Generate Conventional Commit messages and changelog sections using AI."""
