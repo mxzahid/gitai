@@ -1,6 +1,7 @@
 """Configuration management for GitAI."""
 
 import os
+from typing import Any
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -70,12 +71,22 @@ class Config:
         # auto-detect provider based on available environment variables
         configured_provider = llm_data.get("provider")
         if configured_provider is None:
-            if os.getenv("OPENAI_API_KEY"):
-                configured_provider = "openai"
-            elif os.getenv("OLLAMA_BASE_URL") or os.getenv("OLLAMA_MODEL"):
+            # Check environment variables for auto-detection
+            openai_key = os.getenv("OPENAI_API_KEY")
+            ollama_url = os.getenv("OLLAMA_BASE_URL")
+            ollama_model = os.getenv("OLLAMA_MODEL")
+
+            # Also check for user-level config directory
+            home_config = cls._load_user_config()
+
+            if ollama_url or ollama_model or home_config.get("use_ollama"):
                 configured_provider = "ollama"
+            elif openai_key:
+                configured_provider = "openai"
             else:
-                configured_provider = None  # fallback
+                configured_provider = (
+                    "openai"  # fallback to openai (will use non-AI mode if no key)
+                )
 
         llm_config = LLMConfig(
             provider=configured_provider,
@@ -125,6 +136,18 @@ class Config:
             debug_settings=debug_config,
             git_root=git_root,
         )
+
+    @classmethod
+    def _load_user_config(cls) -> dict[str, Any]:
+        """Load user-level configuration from ~/.config/gitai/config.toml"""
+        from pathlib import Path
+
+        config_dir = Path.home() / ".config" / "gitai"
+        config_file = config_dir / "config.toml"
+
+        if config_file.exists():
+            return load_toml_config(config_file)
+        return {}
 
     def is_llm_available(self) -> bool:
         """Check if LLM provider is available."""

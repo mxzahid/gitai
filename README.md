@@ -127,9 +127,39 @@ git-ai changelog --since v1.0.0 --to main
 - `OLLAMA_BASE_URL`: Ollama server URL (default: http://localhost:11434)
 - `OLLAMA_MODEL`: Ollama model name (default: qwen2.5-coder:3b)
 
-### Configuration File
+**Important for pipx users**: pipx creates isolated environments that don't inherit shell environment variables. Use one of these solutions:
 
-GitAI supports optional configuration via a `.gitai.toml` file in your git repository root. This allows you to customize behavior beyond environment variables.
+```bash
+# Solution 1: Use the setup command (easiest)
+git-ai setup --provider ollama --model qwen2.5-coder:3b
+# This creates ~/.config/gitai/config.toml for global configuration
+
+# Solution 2: Use .gitai.toml config file (per-project)
+# Create .gitai.toml in your project root with:
+[llm]
+provider = "ollama"
+model = "qwen2.5-coder:3b"
+
+# Solution 3: Set variables in your shell profile (.bashrc, .zshrc, etc.)
+export OLLAMA_BASE_URL="http://localhost:11434"
+export OLLAMA_MODEL="qwen2.5-coder:3b"
+# Then restart your terminal
+
+# Solution 4: Use environment variables inline
+OLLAMA_BASE_URL="http://localhost:11434" OLLAMA_MODEL="qwen2.5-coder:3b" git-ai commit
+```
+
+### Configuration Files
+
+GitAI supports configuration at multiple levels:
+
+1. **Global config**: `~/.config/gitai/config.toml` (applies to all repositories)
+2. **Project config**: `.gitai.toml` in git repository root (overrides global config)
+
+Create a global configuration easily with:
+```bash
+git-ai setup --provider ollama --model qwen2.5-coder:3b
+```
 
 **Auto-detection**: GitAI automatically detects your LLM provider based on environment variables (no config file needed!):
 - If `OPENAI_API_KEY` is set → uses OpenAI
